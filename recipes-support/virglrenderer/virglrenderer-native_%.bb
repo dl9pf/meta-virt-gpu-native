@@ -2,7 +2,7 @@ DESCRIPTION = "virglrenderer"
 
 #DEPENDS = " expat mesa"
 #DEPENDS = " expat mesa libepoxy"
-DEPENDS = " expat libepoxy"
+#DEPENDS = " expat libepoxy"
 
 LICENSE = "MIT"
 LIC_FILES_CHKSUM = "file://${COREBASE}/LICENSE;md5=4d92cd373abda3937c2bc47fbc49d690"
@@ -15,6 +15,11 @@ PV = "0.0+git${SRCPV}"
 
 S = "${WORKDIR}/git"
 
-inherit autotools pkgconfig
+inherit autotools pkgconfig native
+#inherit autotools native
 
-BBCLASSEXTEND_append = "native nativesdk"
+do_configure_prepend () {
+    export  PKG_CONFIG_PATH="${PKG_CONFIG_PATH}:/usr/lib/x86_64-linux-gnu/pkgconfig"
+}
+
+#BBCLASSEXTEND_append = "native nativesdk"
